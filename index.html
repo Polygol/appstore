@@ -583,10 +583,6 @@
                         <div class="app-info">
                             <div class="app-name">${app.name}</div>
                             <div class="app-developer">${app.developer}</div>
-                            <div class="app-rating">
-                                <span class="material-symbols-rounded" style="font-size: 16px;">star</span>
-                                ${app.rating.toFixed(1)}
-                            </div>
                         </div>
                     </div>
                     <button class="install-btn" data-id="${app.id}" ${isInstalled ? 'disabled' : ''}>
