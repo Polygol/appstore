@@ -1,0 +1,22 @@
+[
+    {
+        "id": "music",
+        "name": "Music",
+        "developer": "kirbIndustries",
+        "rating": 4.8,
+        "category": "Entertainment",
+        "iconUrl": "/music/favicon.png",
+        "url": "/music/index.html",
+        "filesToCache": ["/music/index.html", "/music/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "weather",
+        "name": "Weather",
+        "developer": "OpenMeteo",
+        "rating": 4.2,
+        "category": "Entertainment",
+        "iconUrl": "/weather/favicon.png",
+        "url": "/weather/index.html",
+        "filesToCache": ["/weather/index.html", "/weather/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    }
+]
