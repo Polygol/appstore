@@ -6,7 +6,7 @@
         "category": "Tools",
         "iconUrl": "/chronos/favicon.png",
         "url": "/chronos/index.html",
-        "filesToCache": ["/chronos/index.html", "/chronos/favicon.png", "/assets/js/gurasuraisu-api.js"]
+        "filesToCache": ["/chronos/index.html", "/chronos/favicon.png", "/assets/js/gurasuraisu-api.js", "https://www.gstatic.com/delight/funbox/timer_utilitarian_v2.mp3"]
     },
     {
         "id": "ailuator",
@@ -51,7 +51,7 @@
         "category": "Entertainment",
         "iconUrl": "/music/favicon.png",
         "url": "/music/index.html",
-        "filesToCache": ["/music/index.html", "/music/favicon.png", "/assets/js/gurasuraisu-api.js"]
+        "filesToCache": ["/music/index.html", "/music/favicon.png", "/assets/js/gurasuraisu-api.js", "https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"]
     },
     {
         "id": "clapper",
