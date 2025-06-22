@@ -6,177 +6,165 @@
     <title>App Store</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,700,1,0" />
-    <!-- 1. Include the Gurasuraisu API to communicate with the parent -->
-    <script src="/assets/js/gurasuraisu-api.js" defer></script>
+    <script src="/assets/gurapp/api/gurasuraisu-api.js" defer></script>
     <style>
-        /* 2. Reusing the exact same CSS variable definitions from Chronos */
-        :root {
-            --background-color-dark: #1c1c1c;
-            --text-color-dark: #f9f9f9;
-            --secondary-text-color-dark: rgba(255, 255, 255, 0.7);
-            --modal-background-dark: rgba(51, 51, 51, 0.8);
-            --search-background-dark: rgba(51, 51, 51, 0.5);
-            --glass-border-dark: rgba(100, 100, 100, 0.2);
-            --background-color-light: #f0f0f0;
-            --text-color-light: #333333;
-            --secondary-text-color-light: rgba(0, 0, 0, 0.7);
-            --modal-background-light: rgba(220, 220, 220, 0.8);
-            --search-background-light: rgba(220, 220, 220, 0.5);
-            --glass-border-light: rgba(200, 200, 200, 0.2);
-            --background-color: var(--background-color-dark);
-            --text-color: var(--text-color-dark);
-            --secondary-text-color: var(--secondary-text-color-dark);
-            --modal-background: var(--modal-background-dark);
-            --search-background: var(--search-background-dark);
-            --glass-border: var(--glass-border-dark);
-        }
-        body.light-theme {
-            --background-color: var(--background-color-light);
-            --text-color: var(--text-color-light);
-            --secondary-text-color: var(--secondary-text-color-light);
-            --modal-background: var(--modal-background-light);
-            --search-background: var(--search-background-light);
-            --glass-border: var(--glass-border-light);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 10.04 10.04"><circle cx="5.02" cy="5.02" r="4.52" style="fill:rgba(0,0,0,0.5);stroke:rgba(255,255,255,0.5);stroke-width:1"/></svg>') 10 10, auto !important;
         }
-        
+
         body {
-            background-color: var(--background-color);
+            background-color: #1c1c1c;
             min-height: 100vh;
             padding: 20px;
-            padding-top: 80px; /* Space for the fixed toolbar */
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-            user-select: none;
-        }
-
-        /* 3. Reusing the toolbar style from Chronos */
-        .toolbar {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 10px;
-          padding: 15px 20px;
-          position: fixed;
-          top: 0px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 1000;
-          width: 100%;
-          height: 80px;
-        }
-        .toolbar::before {
-          content: ""; position: absolute; inset: 0; z-index: -1;
-          backdrop-filter: blur(1px);
-        }
-        .toolbar::after {
-          content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
-          backdrop-filter: blur(10px);
-          mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-          -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-        }
-
-        /* 4. Reusing/adapting button and input styles from Chronos */
-        .tab-btn, .action-btn {
-            background-color: var(--search-background);
-            color: var(--text-color);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 8px 20px;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s, transform 0.15s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(10px);
-        }
-        .tab-btn.active {
-            background-color: var(--text-color);
-            color: var(--background-color);
-        }
-        .search-input, #externalStoreInput {
-            background-color: var(--search-background);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            color: var(--text-color);
-            padding: 8px 15px;
-            height: 40px;
-            width: 100%;
-            outline: none;
-            backdrop-filter: blur(10px);
-        }
-        .action-btn {
-            height: 40px;
-            padding: 8px 16px;
-        }
-        #addStoreBtn { background-color: #4CAF50; border-color: transparent; }
-
-        /* App Grid styling */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Reusing alarm/clock item style for app cards */
-        .app-card {
-            background-color: var(--modal-background);
-            border-radius: 15px;
-            padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            transition: transform 0.2s;
+            gap: 20px;
+            color: white;
         }
-        .app-card:hover { transform: translateY(-5px); }
-        .app-header { display: flex; align-items: center; gap: 15px; }
-        .app-icon { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; }
-        .app-info { flex-grow: 1; }
-        .app-name { font-weight: 600; font-size: 1.1em; }
-        .app-developer { color: var(--secondary-text-color); font-size: 0.9em; }
-        .app-rating { color: #bdd6ff; font-size: 0.9em; }
 
-        .install-btn {
-            background-color: var(--text-color);
-            color: var(--background-color);
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            padding: 15px 20px;
+            background-color: transparent;
+            border: 2px solid #666666;
+            border-radius: 25px;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: #333;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: white;
+            outline: none;
+        }
+
+        .tool-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .divider {
+            width: 2px;
+            height: 30px;
+            background-color: #666666;
+            margin: 0 10px;
+        }
+
+        .category-btn {
+            background-color: #666666;
+            color: white;
             border: none;
             border-radius: 25px;
-            padding: 10px 15px;
+            padding: 8px 15px;
             cursor: pointer;
-            font-weight: 600;
             transition: background-color 0.2s;
         }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: #bdd6ff;
+            color: #1c1c1c;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background-color: transparent;
+            border: 2px solid #666666;
+            border-radius: 25px;
+        }
+
+        .app-card {
+            background-color: #333;
+            border-radius: 15px;
+            padding: 15px;
+            transition: transform 0.2s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .app-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .app-name {
+            font-weight: 600;
+            color: white;
+        }
+
+        .app-developer {
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .app-rating {
+            color: #bdd6ff;
+            font-size: 0.9em;
+        }
+
+        .install-btn {
+            width: 100%;
+            background-color: #bdd6ff;
+            color: #1c1c1c;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .install-btn:hover {
+            background-color: white;
+        }
+
         .install-btn:disabled {
-            background-color: var(--search-background);
-            color: var(--secondary-text-color);
+            background-color: #666666;
             cursor: not-allowed;
         }
     </style>
 </head>
 <body>
     <div class="toolbar">
-        <input type="text" class="search-input" placeholder="Search apps..." style="flex-grow: 1;">
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <button class="tab-btn active" data-category="All">All</button>
-            <button class="tab-btn" data-category="Games">Games</button>
-            <button class="tab-btn" data-category="Productivity">Productivity</button>
-            <button class="tab-btn" data-category="Entertainment">Entertainment</button>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search apps...">
         </div>
-        <div style="display: flex; gap: 10px; align-items: center; flex-grow: 1;">
-            <input type="text" id="externalStoreInput" class="search-input" placeholder="Add external app store URL...">
-            <button id="addStoreBtn" class="action-btn">Add</button>
+        <div class="divider"></div>
+        <div class="tool-group">
+            <button class="category-btn active" data-category="All">All</button>
+            <button class="category-btn" data-category="Games">Games</button>
+            <button class="category-btn" data-category="Productivity">Productivity</button>
+            <button class="category-btn" data-category="Entertainment">Entertainment</button>
+        </div>
+        <div class="divider"></div>
+        <div class="tool-group" style="flex-grow: 1;">
+            <input type="text" id="externalStoreInput" class="search-input" placeholder="Add external app store URL">
+            <button id="addStoreBtn" class="category-btn" style="background-color: #4CAF50;">Add</button>
         </div>
     </div>
 
@@ -187,32 +175,46 @@
     <script>
         const appGrid = document.getElementById('appGrid');
         const searchInput = document.querySelector('.search-input');
-        const categoryBtns = document.querySelectorAll('.tab-btn');
+        const categoryBtns = document.querySelectorAll('.category-btn');
         const externalStoreInput = document.getElementById('externalStoreInput');
         const addStoreBtn = document.getElementById('addStoreBtn');
-
-        let appStoreInventory = [];
+    
+        let appStoreInventory = []; // Will be populated from fetched sources
         let alreadyInstalledApps = [];
         let currentCategory = 'All';
-
-        let storeSources = JSON.parse(localStorage.getItem('appStoreSources')) || ["/appstore/inventory.json"];
-
+    
+        // List of app store sources. Starts with your local one.
+        // We'll save this to localStorage so user-added stores are remembered.
+        let storeSources = JSON.parse(localStorage.getItem('appStoreSources')) || [
+            "/appstore/inventory.json" // Your default, local store
+        ];
+    
+        // --- Core Functions ---
+    
         async function fetchInventory(url) {
             try {
                 const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                return await response.json();
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(`Successfully fetched inventory from ${url}`, data);
+                return data;
             } catch (error) {
-                console.error(`Failed to fetch inventory from ${url}:`, error);
-                if (window.Gurasuraisu) Gurasuraisu.showPopup(`Error loading store: ${url}`);
-                return [];
+                console.error(`Failed to fetch or parse inventory from ${url}:`, error);
+                // Use Gurasuraisu API to show an error to the user
+                if (window.Gurasuraisu) {
+                    Gurasuraisu.showPopup(`Error loading store: ${url}`);
+                }
+                return []; // Return empty array on failure
             }
         }
-
+    
         async function loadAllInventories() {
             appGrid.innerHTML = `<p>Loading apps...</p>`;
             const allFetchPromises = storeSources.map(url => fetchInventory(url));
             const allAppsNested = await Promise.all(allFetchPromises);
+            // Flatten the array of arrays into a single array of app objects
             appStoreInventory = allAppsNested.flat();
             filterAndRender();
         }
@@ -220,18 +222,16 @@
         function saveStoreSources() {
             localStorage.setItem('appStoreSources', JSON.stringify(storeSources));
         }
-
+    
         function createAppCard(app) {
             const isInstalled = alreadyInstalledApps.includes(app.name);
             return `
                 <div class="app-card">
-                    <div class="app-header">
-                        <img src="${app.iconUrl}" alt="${app.name}" class="app-icon" crossorigin="anonymous" referrerpolicy="no-referrer">
-                        <div class="app-info">
-                            <div class="app-name">${app.name}</div>
-                            <div class="app-developer">${app.developer}</div>
-                            <div class="app-rating">★ ${app.rating.toFixed(1)}</div>
-                        </div>
+                    <img src="${app.iconUrl}" alt="${app.name}" class="app-icon" crossorigin="anonymous" referrerpolicy="no-referrer">
+                    <div class="app-info">
+                        <div class="app-name">${app.name}</div>
+                        <div class="app-developer">${app.developer}</div>
+                        <div class="app-rating">★ ${app.rating.toFixed(1)}</div>
                     </div>
                     <button class="install-btn" data-id="${app.id}" ${isInstalled ? 'disabled' : ''}>
                         ${isInstalled ? 'Installed' : 'Install'}
@@ -239,18 +239,18 @@
                 </div>
             `;
         }
-
+    
         function filterAndRender() {
             const searchTerm = searchInput.value.toLowerCase();
             let filteredApps = appStoreInventory;
-
+    
             if (searchTerm) {
                 filteredApps = filteredApps.filter(app => 
                     app.name.toLowerCase().includes(searchTerm) || 
                     app.developer.toLowerCase().includes(searchTerm)
                 );
             }
-
+    
             if (currentCategory !== 'All') {
                 filteredApps = filteredApps.filter(app => app.category === currentCategory);
             }
@@ -261,25 +261,27 @@
                  appGrid.innerHTML = `<p>No apps found.</p>`;
             }
         }
-
+    
+        // --- Event Listeners ---
+    
         window.addEventListener('message', (event) => {
             if (event.origin !== window.location.origin) return;
             if (event.data.type === 'installed-apps-list') {
                 alreadyInstalledApps = event.data.apps;
-                filterAndRender();
+                filterAndRender(); // Re-render now that we know what's installed
             }
         });
-
+    
         addStoreBtn.addEventListener('click', () => {
             const newUrl = externalStoreInput.value.trim();
             if (newUrl && !storeSources.includes(newUrl)) {
                 storeSources.push(newUrl);
                 saveStoreSources();
-                loadAllInventories();
+                loadAllInventories(); // Reload everything to include the new source
                 externalStoreInput.value = '';
             }
         });
-
+    
         appGrid.addEventListener('click', (e) => {
             if (e.target.classList.contains('install-btn') && !e.target.disabled) {
                 const btn = e.target;
@@ -292,9 +294,9 @@
                 }
             }
         });
-
+    
         searchInput.addEventListener('input', filterAndRender);
-
+    
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 categoryBtns.forEach(b => b.classList.remove('active'));
@@ -303,8 +305,10 @@
                 filterAndRender();
             });
         });
-
+    
+        // --- Initial Load ---
         loadAllInventories();
+    
     </script>
 </body>
 </html>
