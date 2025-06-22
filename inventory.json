@@ -1,22 +1,119 @@
 [
     {
+        "id": "chronos",
+        "name": "Chronos",
+        "developer": "kirbIndustries",
+        "category": "Utilities",
+        "iconUrl": "/chronos/favicon.png",
+        "url": "/chronos/index.html",
+        "filesToCache": ["/chronos/index.html", "/chronos/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "ailuator",
+        "name": "Ailuator",
+        "developer": "kirbIndustries",
+        "category": "Utilities",
+        "iconUrl": "/ailuator/favicon.png",
+        "url": "/ailuator/index.html",
+        "filesToCache": ["/ailuator/index.html", "/ailuator/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "wordy",
+        "name": "Wordy",
+        "developer": "kirbIndustries",
+        "category": "Productivity",
+        "iconUrl": "/wordy/favicon.png",
+        "url": "/wordy/index.html",
+        "filesToCache": ["/wordy/index.html", "/wordy/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "fantaskical",
+        "name": "Fantaskical",
+        "developer": "kirbIndustries",
+        "category": "Productivity",
+        "iconUrl": "/fantaskical/favicon.png",
+        "url": "/fantaskical/index.html",
+        "filesToCache": ["/fantaskical/index.html", "/fantaskical/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "moments",
+        "name": "Moments",
+        "developer": "kirbIndustries",
+        "category": "Creativity",
+        "iconUrl": "/moments/favicon.png",
+        "url": "/moments/index.html",
+        "filesToCache": ["/moments/index.html", "/moments/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
         "id": "music",
         "name": "Music",
         "developer": "kirbIndustries",
-        "rating": 4.8,
         "category": "Entertainment",
         "iconUrl": "/music/favicon.png",
         "url": "/music/index.html",
         "filesToCache": ["/music/index.html", "/music/favicon.png", "/assets/js/gurasuraisu-api.js"]
     },
     {
+        "id": "clapper",
+        "name": "Clapper",
+        "developer": "kirbIndustries",
+        "category": "Entertainment",
+        "iconUrl": "/clapper/favicon.png",
+        "url": "/clapper/index.html",
+        "filesToCache": ["/clapper/index.html", "/clapper/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "waves",
+        "name": "Waves",
+        "developer": "kirbIndustries",
+        "category": "Other",
+        "iconUrl": "/waves/favicon.png",
+        "url": "/waves/index.html",
+        "filesToCache": ["/waves/index.html", "/waves/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "sketchpad",
+        "name": "SketchPad",
+        "developer": "kirbIndustries",
+        "category": "Creativity",
+        "iconUrl": "/sketchpad/favicon.png",
+        "url": "/sketchpad/index.html",
+        "filesToCache": ["/sketchpad/index.html", "/sketchpad/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "sketchpad",
+        "name": "SketchPad",
+        "developer": "kirbIndustries",
+        "category": "Creativity",
+        "iconUrl": "/sketchpad/favicon.png",
+        "url": "/sketchpad/index.html",
+        "filesToCache": ["/sketchpad/index.html", "/sketchpad/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "invitations",
+        "name": "Invitations",
+        "developer": "kirbIndustries",
+        "category": "Social",
+        "iconUrl": "/invitations/favicon.png",
+        "url": "/invitations/index.html",
+        "filesToCache": ["/invitations/index.html", "/invitations/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
         "id": "weather",
         "name": "Weather",
-        "developer": "OpenMeteo",
-        "rating": 4.2,
-        "category": "Entertainment",
+        "developer": "kirbIndustries, OpenMeteo",
+        "category": "Information",
         "iconUrl": "/weather/favicon.png",
         "url": "/weather/index.html",
         "filesToCache": ["/weather/index.html", "/weather/favicon.png", "/assets/js/gurasuraisu-api.js"]
+    },
+    {
+        "id": "camera",
+        "name": "Camera",
+        "developer": "kirbIndustries",
+        "category": "Creativity",
+        "iconUrl": "/camera/favicon.png",
+        "url": "/camera/index.html",
+        "filesToCache": ["/camera/index.html", "/camera/favicon.png", "/assets/js/gurasuraisu-api.js"]
     }
 ]
