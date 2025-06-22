@@ -3,7 +3,7 @@
         "id": "chronos",
         "name": "Chronos",
         "developer": "kirbIndustries",
-        "category": "Utilities",
+        "category": "Tools",
         "iconUrl": "/chronos/favicon.png",
         "url": "/chronos/index.html",
         "filesToCache": ["/chronos/index.html", "/chronos/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -12,7 +12,7 @@
         "id": "ailuator",
         "name": "Ailuator",
         "developer": "kirbIndustries",
-        "category": "Utilities",
+        "category": "Tools",
         "iconUrl": "/ailuator/favicon.png",
         "url": "/ailuator/index.html",
         "filesToCache": ["/ailuator/index.html", "/ailuator/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -21,7 +21,7 @@
         "id": "wordy",
         "name": "Wordy",
         "developer": "kirbIndustries",
-        "category": "Productivity",
+        "category": "Tools",
         "iconUrl": "/wordy/favicon.png",
         "url": "/wordy/index.html",
         "filesToCache": ["/wordy/index.html", "/wordy/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -30,7 +30,7 @@
         "id": "fantaskical",
         "name": "Fantaskical",
         "developer": "kirbIndustries",
-        "category": "Productivity",
+        "category": "Tools",
         "iconUrl": "/fantaskical/favicon.png",
         "url": "/fantaskical/index.html",
         "filesToCache": ["/fantaskical/index.html", "/fantaskical/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -39,7 +39,7 @@
         "id": "moments",
         "name": "Moments",
         "developer": "kirbIndustries",
-        "category": "Creativity",
+        "category": "Entertainment",
         "iconUrl": "/moments/favicon.png",
         "url": "/moments/index.html",
         "filesToCache": ["/moments/index.html", "/moments/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -75,7 +75,7 @@
         "id": "sketchpad",
         "name": "SketchPad",
         "developer": "kirbIndustries",
-        "category": "Creativity",
+        "category": "Entertainment",
         "iconUrl": "/sketchpad/favicon.png",
         "url": "/sketchpad/index.html",
         "filesToCache": ["/sketchpad/index.html", "/sketchpad/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -84,7 +84,7 @@
         "id": "sketchpad",
         "name": "SketchPad",
         "developer": "kirbIndustries",
-        "category": "Creativity",
+        "category": "Entertainment",
         "iconUrl": "/sketchpad/favicon.png",
         "url": "/sketchpad/index.html",
         "filesToCache": ["/sketchpad/index.html", "/sketchpad/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -93,7 +93,7 @@
         "id": "invitations",
         "name": "Invitations",
         "developer": "kirbIndustries",
-        "category": "Social",
+        "category": "Community",
         "iconUrl": "/invitations/favicon.png",
         "url": "/invitations/index.html",
         "filesToCache": ["/invitations/index.html", "/invitations/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -102,7 +102,7 @@
         "id": "weather",
         "name": "Weather",
         "developer": "kirbIndustries, OpenMeteo",
-        "category": "Information",
+        "category": "Tools",
         "iconUrl": "/weather/favicon.png",
         "url": "/weather/index.html",
         "filesToCache": ["/weather/index.html", "/weather/favicon.png", "/assets/js/gurasuraisu-api.js"]
@@ -111,7 +111,7 @@
         "id": "camera",
         "name": "Camera",
         "developer": "kirbIndustries",
-        "category": "Creativity",
+        "category": "Entertainment",
         "iconUrl": "/camera/favicon.png",
         "url": "/camera/index.html",
         "filesToCache": ["/camera/index.html", "/camera/favicon.png", "/assets/js/gurasuraisu-api.js"]
