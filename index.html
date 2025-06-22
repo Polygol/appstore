@@ -70,13 +70,15 @@
             background-color: var(--background-color);
             min-height: 100vh;
             padding: 20px;
-            padding-top: 100px;
+            padding-top: 80px;
             display: flex;
             flex-direction: column;
             gap: 20px;
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
             user-select: none;
+            justify-content: center;
+            align-items: center;
         }
 
         body::-webkit-scrollbar {
@@ -95,7 +97,8 @@
         .toolbar {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-content: center;
+            flex-direction: row;
             gap: 10px;
             padding: 15px 20px;
             background-color: transparent;
@@ -121,7 +124,7 @@
 
         .toolbar::after {
             content: "";
-            position: "";
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -142,69 +145,57 @@
             );
         }
 
-        .search-input {
-            flex-grow: 1;
-            max-width: 300px;
+        .tab-btn {
             background-color: var(--search-background);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 8px 15px;
             color: var(--text-color);
-            outline: none;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             backdrop-filter: blur(10px);
-            transition: background-color 0.3s, border-color 0.3s;
+            border: 1px solid var(--glass-border);
+        }
+
+        .tab-btn.active {
+            background-color: var(--text-color);
+            color: var(--background-color);
+        }
+
+        .toolbar .tab-btn .material-symbols-rounded {
+            color: var(--text-color) !important;
+            transition: color 0.2s;
+        }
+
+        .toolbar .tab-btn.active .material-symbols-rounded {
+            color: var(--background-color) !important;
+        }
+
+        .search-input {
+            background-color: var(--search-background);
+            border-radius: 25px;
+            color: var(--text-color);
+            padding: 8px 15px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            min-width: 200px;
         }
 
         .search-input::placeholder {
             color: var(--secondary-text-color);
         }
 
-        .search-input:focus {
-            border-color: var(--text-color);
-        }
-
-        .category-btn {
-            background-color: var(--search-background);
-            color: var(--text-color);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 8px 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transform: scale(1);
-        }
-
-        .category-btn:hover {
-            background-color: var(--modal-background);
-        }
-
-        .category-btn.active {
-            background-color: var(--text-color);
-            color: var(--background-color);
-        }
-
-        .category-btn:active {
-            transform: scale(0.96);
-            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
-        }
-
-        .toolbar .category-btn .material-symbols-rounded {
-            color: var(--text-color) !important;
-            transition: color 0.2s;
-        }
-
-        .toolbar .category-btn.active .material-symbols-rounded {
-            color: var(--background-color) !important;
-        }
-
         .content {
             width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
         }
 
         .app-grid {
@@ -233,7 +224,6 @@
         .app-card:hover {
             transform: translateY(-5px);
             background-color: var(--modal-background);
-            border-color: var(--text-color);
         }
 
         .app-header {
@@ -284,7 +274,7 @@
             border-radius: 25px;
             padding: 10px 15px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -294,14 +284,13 @@
         }
 
         .install-btn:hover:not(:disabled) {
-            background-color: var(--modal-background);
+            background-color: var(--search-background);
             color: var(--text-color);
-            border-color: var(--text-color);
+            transform: scale(1.02);
         }
 
         .install-btn:active:not(:disabled) {
-            transform: scale(0.96);
-            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
+            transform: scale(0.98);
         }
 
         .install-btn:disabled {
@@ -313,8 +302,8 @@
         }
 
         .material-symbols-rounded {
-            font-size: 20px;
-            color: inherit;
+            font-size: 24px;
+            color: var(--text-color);
         }
 
         .loading-message, .no-apps-message {
@@ -323,6 +312,20 @@
             font-size: 16px;
             padding: 40px;
             grid-column: 1 / -1;
+        }
+
+        /* For clickable elements */
+        button, 
+        .tab-btn {
+            transform: scale(1);
+            transition: transform 0.15s cubic-bezier(0.2, 0, 0.38, 0.9);
+        }
+
+        /* Active effect */
+        button:active, 
+        .tab-btn:active {
+            transform: scale(0.96);
+            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
         }
 
         .create-modal {
@@ -336,7 +339,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 1001;
             visibility: hidden;
             opacity: 0;
             transition: visibility 0s linear 0.25s, opacity 0.25s linear;
@@ -416,10 +419,6 @@
             outline: none;
         }
 
-        .form-input:focus, .form-textarea:focus {
-            border-color: var(--text-color);
-        }
-
         .form-textarea {
             min-height: 80px;
             resize: vertical;
@@ -445,69 +444,26 @@
             font-size: 1rem;
             width: 100%;
             margin-top: 10px;
-            transform: scale(1);
-            transition: all 0.2s ease;
         }
 
-        .submit-btn:hover {
-            background-color: var(--modal-background);
-            color: var(--text-color);
-        }
-
-        .submit-btn:active {
-            transform: scale(0.96);
-            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-                padding-top: 120px;
+        @media (max-width: 730px) {
+            .toolbar {
+                justify-content: flex-start;
             }
 
-            .toolbar {
-                flex-direction: column;
-                height: auto;
-                min-height: 100px;
-                padding: 15px;
-                align-items: stretch;
-                gap: 8px;
+            .tab-btn {
+                font-size: 0;
+                padding-left: 30px;
             }
 
             .search-input {
-                max-width: none;
-            }
-
-            .category-buttons {
-                display: flex;
-                gap: 8px;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .app-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                padding: 15px;
-            }
-
-            .category-btn {
-                font-size: 13px;
-                padding: 6px 12px;
+                min-width: 150px;
             }
         }
 
         @media (max-width: 480px) {
             .app-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .toolbar {
-                padding: 10px;
-            }
-
-            .category-btn {
-                width: 100%;
-                justify-content: center;
             }
         }
     </style>
@@ -516,25 +472,23 @@
     <div class="content">
         <div class="toolbar">
             <input type="text" class="search-input" placeholder="Search apps...">
-            <div class="category-buttons">
-                <button class="category-btn active" data-category="All">
-                    <span class="material-symbols-rounded">apps</span>
-                    All
-                </button>
-                <button class="category-btn" data-category="Games">
-                    <span class="material-symbols-rounded">sports_esports</span>
-                    Games
-                </button>
-                <button class="category-btn" data-category="Productivity">
-                    <span class="material-symbols-rounded">work</span>
-                    Productivity
-                </button>
-                <button class="category-btn" data-category="Entertainment">
-                    <span class="material-symbols-rounded">movie</span>
-                    Entertainment
-                </button>
-            </div>
-            <button class="category-btn" id="addStoreBtn">
+            <button class="tab-btn active" data-category="All">
+                <span class="material-symbols-rounded">apps</span>
+                All
+            </button>
+            <button class="tab-btn" data-category="Games">
+                <span class="material-symbols-rounded">sports_esports</span>
+                Games
+            </button>
+            <button class="tab-btn" data-category="Productivity">
+                <span class="material-symbols-rounded">work</span>
+                Productivity  
+            </button>
+            <button class="tab-btn" data-category="Entertainment">
+                <span class="material-symbols-rounded">movie</span>
+                Entertainment
+            </button>
+            <button class="tab-btn" id="addStoreBtn">
                 <span class="material-symbols-rounded">add</span>
                 Add Store
             </button>
@@ -550,37 +504,25 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Add External App Store</h2>
-                <button class="close-modal" id="closeModal">
-                    <span class="material-symbols-rounded">close</span>
-                </button>
+                <button class="close-modal" id="closeModal">×</button>
             </div>
-            <form id="addStoreForm">
-                <div class="form-group">
-                    <label class="form-label" for="storeUrl">App Store URL</label>
-                    <input type="url" id="storeUrl" class="form-input" placeholder="https://example.com/appstore/inventory.json" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="storeName">Store Name (Optional)</label>
-                    <input type="text" id="storeName" class="form-input" placeholder="My App Store">
-                </div>
-                <button type="submit" class="submit-btn">
-                    <span class="material-symbols-rounded">add</span>
-                    Add Store
-                </button>
-            </form>
+            <div class="form-group">
+                <label class="form-label">App Store URL</label>
+                <input type="url" class="form-input" id="storeUrlInput" placeholder="https://example.com/inventory.json" required>
+            </div>
+            <button class="submit-btn" id="submitStore">Add Store</button>
         </div>
     </div>
 
     <script>
         const appGrid = document.getElementById('appGrid');
         const searchInput = document.querySelector('.search-input');
-        const categoryBtns = document.querySelectorAll('.category-btn[data-category]');
+        const categoryBtns = document.querySelectorAll('.tab-btn[data-category]');
         const addStoreBtn = document.getElementById('addStoreBtn');
         const addStoreModal = document.getElementById('addStoreModal');
         const closeModal = document.getElementById('closeModal');
-        const addStoreForm = document.getElementById('addStoreForm');
-        const storeUrlInput = document.getElementById('storeUrl');
-        const storeNameInput = document.getElementById('storeName');
+        const submitStore = document.getElementById('submitStore');
+        const storeUrlInput = document.getElementById('storeUrlInput');
     
         let appStoreInventory = [];
         let alreadyInstalledApps = [];
@@ -589,7 +531,7 @@
         let storeSources = JSON.parse(localStorage.getItem('appStoreSources')) || [
             "/appstore/inventory.json"
         ];
-    
+
         // Modal functionality
         addStoreBtn.addEventListener('click', () => {
             addStoreModal.classList.add('show');
@@ -605,22 +547,24 @@
             }
         });
 
-        addStoreForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        submitStore.addEventListener('click', () => {
             const newUrl = storeUrlInput.value.trim();
-            const storeName = storeNameInput.value.trim();
-            
             if (newUrl && !storeSources.includes(newUrl)) {
                 storeSources.push(newUrl);
                 saveStoreSources();
                 loadAllInventories();
-                addStoreModal.classList.remove('show');
                 storeUrlInput.value = '';
-                storeNameInput.value = '';
-                
+                addStoreModal.classList.remove('show');
                 if (window.Gurasuraisu) {
-                    Gurasuraisu.showPopup(`App store "${storeName || 'External Store'}" added successfully`);
+                    Gurasuraisu.showPopup('App store added successfully');
                 }
+            }
+        });
+
+        // Handle enter key in modal
+        storeUrlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                submitStore.click();
             }
         });
     
