@@ -20,7 +20,6 @@
             --dark-overlay: rgba(51, 51, 51, 0.2);
             --dark-transparent: rgba(255, 255, 255, 0.1); 
             --glass-border-dark: rgba(100, 100, 100, 0.2);
-            --accent-color-dark: #bdd6ff;
             
             /* Light Theme Variables */
             --background-color-light: #f0f0f0;
@@ -32,7 +31,6 @@
             --light-overlay: rgba(220, 220, 220, 0.2);
             --light-transparent: rgba(255, 255, 255, 0.1);
             --glass-border-light: rgba(200, 200, 200, 0.2);
-            --accent-color-light: #4285f4;
             
             /* Default to Dark Theme */
             --background-color: var(--background-color-dark);
@@ -44,7 +42,6 @@
             --overlay-color: var(--dark-overlay);
             --transparent-color: var(--dark-transparent);
             --glass-border: var(--glass-border-dark);
-            --accent-color: var(--accent-color-dark);
         }
         
         body.light-theme {
@@ -57,7 +54,6 @@
             --overlay-color: var(--light-overlay);
             --transparent-color: var(--light-transparent);
             --glass-border: var(--glass-border-light);
-            --accent-color: var(--accent-color-light);
         }
 
         * {
@@ -98,7 +94,9 @@
 
         .toolbar {
             display: flex;
-            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             padding: 15px 20px;
             background-color: transparent;
             border: none;
@@ -108,11 +106,9 @@
             transform: translateX(-50%);
             z-index: 1000;
             transition: top 0.3s ease;
-            width: calc(100% - 40px);
-            max-width: 1200px;
+            width: 100%;
             flex-wrap: wrap;
             height: 80px;
-            align-items: center;
         }
 
         .toolbar::before {
@@ -125,7 +121,7 @@
 
         .toolbar::after {
             content: "";
-            position: absolute;
+            position: "";
             top: 0;
             left: 0;
             width: 100%;
@@ -146,14 +142,9 @@
             );
         }
 
-        .search-container {
-            flex-grow: 1;
-            position: relative;
-            min-width: 200px;
-        }
-
         .search-input {
-            width: 100%;
+            flex-grow: 1;
+            max-width: 300px;
             background-color: var(--search-background);
             border: 1px solid var(--glass-border);
             border-radius: 25px;
@@ -169,55 +160,45 @@
         }
 
         .search-input:focus {
-            border-color: var(--accent-color);
-        }
-
-        .tool-group {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
+            border-color: var(--text-color);
         }
 
         .category-btn {
             background-color: var(--search-background);
             color: var(--text-color);
             border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            padding: 8px 15px;
+            border-radius: 50px;
+            padding: 8px 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 14px;
+            gap: 8px;
             transform: scale(1);
         }
 
         .category-btn:hover {
             background-color: var(--modal-background);
-            transform: scale(1.02);
         }
 
         .category-btn.active {
-            background-color: var(--accent-color);
+            background-color: var(--text-color);
             color: var(--background-color);
-            border-color: var(--accent-color);
         }
 
         .category-btn:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
+            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
         }
 
-        .add-store-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid rgba(76, 175, 80, 0.3);
+        .toolbar .category-btn .material-symbols-rounded {
+            color: var(--text-color) !important;
+            transition: color 0.2s;
         }
 
-        .add-store-btn:hover {
-            background-color: #45a049;
+        .toolbar .category-btn.active .material-symbols-rounded {
+            color: var(--background-color) !important;
         }
 
         .content {
@@ -252,7 +233,7 @@
         .app-card:hover {
             transform: translateY(-5px);
             background-color: var(--modal-background);
-            border-color: var(--accent-color);
+            border-color: var(--text-color);
         }
 
         .app-header {
@@ -288,7 +269,7 @@
         }
 
         .app-rating {
-            color: var(--accent-color);
+            color: var(--text-color);
             font-size: 14px;
             display: flex;
             align-items: center;
@@ -297,13 +278,13 @@
 
         .install-btn {
             width: 100%;
-            background-color: var(--accent-color);
+            background-color: var(--text-color);
             color: var(--background-color);
-            border: 1px solid var(--accent-color);
+            border: 1px solid var(--text-color);
             border-radius: 25px;
             padding: 10px 15px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -313,13 +294,14 @@
         }
 
         .install-btn:hover:not(:disabled) {
-            background-color: var(--text-color);
+            background-color: var(--modal-background);
+            color: var(--text-color);
             border-color: var(--text-color);
-            transform: scale(1.02);
         }
 
         .install-btn:active:not(:disabled) {
-            transform: scale(0.98);
+            transform: scale(0.96);
+            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
         }
 
         .install-btn:disabled {
@@ -343,32 +325,138 @@
             grid-column: 1 / -1;
         }
 
-        .external-store-container {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            min-width: 300px;
-        }
-
-        .external-store-input {
-            flex-grow: 1;
-            background-color: var(--search-background);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 6px 12px;
-            color: var(--text-color);
-            outline: none;
+        .create-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--overlay-color);
             backdrop-filter: blur(10px);
-            transition: background-color 0.3s, border-color 0.3s;
-            font-size: 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 0.25s, opacity 0.25s linear;
         }
 
-        .external-store-input::placeholder {
+        .create-modal.show {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+
+        .modal-content {
+            background-color: var(--search-background);
+            border-radius: 40px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(50px);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background-color: var(--search-background);
+            border-radius: 50px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
             color: var(--secondary-text-color);
+            margin-bottom: 8px;
         }
 
-        .external-store-input:focus {
-            border-color: var(--accent-color);
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            background-color: var(--search-background);
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--text-color);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            background-color: var(--text-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 10px;
+            transform: scale(1);
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--modal-background);
+            color: var(--text-color);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.96);
+            transition: transform 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
         }
 
         @media (max-width: 768px) {
@@ -383,14 +471,18 @@
                 min-height: 100px;
                 padding: 15px;
                 align-items: stretch;
+                gap: 8px;
             }
 
-            .tool-group {
+            .search-input {
+                max-width: none;
+            }
+
+            .category-buttons {
+                display: flex;
+                gap: 8px;
                 justify-content: center;
-            }
-
-            .external-store-container {
-                min-width: unset;
+                flex-wrap: wrap;
             }
 
             .app-grid {
@@ -413,11 +505,6 @@
                 padding: 10px;
             }
 
-            .tool-group {
-                flex-direction: column;
-                gap: 8px;
-            }
-
             .category-btn {
                 width: 100%;
                 justify-content: center;
@@ -428,10 +515,8 @@
 <body>
     <div class="content">
         <div class="toolbar">
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search apps...">
-            </div>
-            <div class="tool-group">
+            <input type="text" class="search-input" placeholder="Search apps...">
+            <div class="category-buttons">
                 <button class="category-btn active" data-category="All">
                     <span class="material-symbols-rounded">apps</span>
                     All
@@ -449,13 +534,10 @@
                     Entertainment
                 </button>
             </div>
-            <div class="external-store-container">
-                <input type="text" id="externalStoreInput" class="external-store-input" placeholder="Add external app store URL">
-                <button id="addStoreBtn" class="category-btn add-store-btn">
-                    <span class="material-symbols-rounded">add</span>
-                    Add
-                </button>
-            </div>
+            <button class="category-btn" id="addStoreBtn">
+                <span class="material-symbols-rounded">add</span>
+                Add Store
+            </button>
         </div>
 
         <div class="app-grid" id="appGrid">
@@ -463,12 +545,42 @@
         </div>
     </div>
 
+    <!-- Add Store Modal -->
+    <div class="create-modal" id="addStoreModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add External App Store</h2>
+                <button class="close-modal" id="closeModal">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+            <form id="addStoreForm">
+                <div class="form-group">
+                    <label class="form-label" for="storeUrl">App Store URL</label>
+                    <input type="url" id="storeUrl" class="form-input" placeholder="https://example.com/appstore/inventory.json" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="storeName">Store Name (Optional)</label>
+                    <input type="text" id="storeName" class="form-input" placeholder="My App Store">
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span class="material-symbols-rounded">add</span>
+                    Add Store
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script>
         const appGrid = document.getElementById('appGrid');
         const searchInput = document.querySelector('.search-input');
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        const externalStoreInput = document.getElementById('externalStoreInput');
+        const categoryBtns = document.querySelectorAll('.category-btn[data-category]');
         const addStoreBtn = document.getElementById('addStoreBtn');
+        const addStoreModal = document.getElementById('addStoreModal');
+        const closeModal = document.getElementById('closeModal');
+        const addStoreForm = document.getElementById('addStoreForm');
+        const storeUrlInput = document.getElementById('storeUrl');
+        const storeNameInput = document.getElementById('storeName');
     
         let appStoreInventory = [];
         let alreadyInstalledApps = [];
@@ -477,6 +589,40 @@
         let storeSources = JSON.parse(localStorage.getItem('appStoreSources')) || [
             "/appstore/inventory.json"
         ];
+    
+        // Modal functionality
+        addStoreBtn.addEventListener('click', () => {
+            addStoreModal.classList.add('show');
+        });
+
+        closeModal.addEventListener('click', () => {
+            addStoreModal.classList.remove('show');
+        });
+
+        addStoreModal.addEventListener('click', (e) => {
+            if (e.target === addStoreModal) {
+                addStoreModal.classList.remove('show');
+            }
+        });
+
+        addStoreForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newUrl = storeUrlInput.value.trim();
+            const storeName = storeNameInput.value.trim();
+            
+            if (newUrl && !storeSources.includes(newUrl)) {
+                storeSources.push(newUrl);
+                saveStoreSources();
+                loadAllInventories();
+                addStoreModal.classList.remove('show');
+                storeUrlInput.value = '';
+                storeNameInput.value = '';
+                
+                if (window.Gurasuraisu) {
+                    Gurasuraisu.showPopup(`App store "${storeName || 'External Store'}" added successfully`);
+                }
+            }
+        });
     
         async function fetchInventory(url) {
             try {
@@ -563,19 +709,6 @@
             }
         });
     
-        addStoreBtn.addEventListener('click', () => {
-            const newUrl = externalStoreInput.value.trim();
-            if (newUrl && !storeSources.includes(newUrl)) {
-                storeSources.push(newUrl);
-                saveStoreSources();
-                loadAllInventories();
-                externalStoreInput.value = '';
-                if (window.Gurasuraisu) {
-                    Gurasuraisu.showPopup('App store added successfully');
-                }
-            }
-        });
-    
         appGrid.addEventListener('click', (e) => {
             if (e.target.closest('.install-btn') && !e.target.closest('.install-btn').disabled) {
                 const btn = e.target.closest('.install-btn');
@@ -593,19 +726,11 @@
     
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                if (btn.id === 'addStoreBtn') return; // Skip the add store button
                 categoryBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentCategory = btn.dataset.category;
                 filterAndRender();
             });
-        });
-
-        // Handle enter key for external store input
-        externalStoreInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                addStoreBtn.click();
-            }
         });
     
         loadAllInventories();
