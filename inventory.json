@@ -6,7 +6,7 @@
         "category": "Tools",
         "iconUrl": "/assets/appicon/alarm.png",
         "url": "/chronos/index.html",
-        "filesToCache": ["/chronos/index.html", "/assets/appicon/alarm.png", "/assets/js/gurasuraisu-api.js", "https://www.gstatic.com/delight/funbox/timer_utilitarian_v2.mp3"]
+        "filesToCache": ["/chronos/index.html", "/assets/appicon/alarm.png", "/assets/js/gurasuraisu-api.js", "https://www.gstatic.com/delight/funbox/timer_utilitarian_v2.mp3", "https://momentjs.com/downloads/moment.min.js", "https://momentjs.com/downloads/moment-timezone-with-data.min.js"]
     },
     {
         "id": "ailuator",
