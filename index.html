@@ -662,14 +662,28 @@
         });
     
         appGrid.addEventListener('click', (e) => {
-            if (e.target.closest('.install-btn') && !e.target.closest('.install-btn').disabled) {
-                const btn = e.target.closest('.install-btn');
-                const appId = btn.dataset.id;
+            const installBtn = e.target.closest('.install-btn');
+            const uninstallBtn = e.target.closest('.uninstall-btn');
+    
+            if (installBtn && !installBtn.disabled) {
+                const appId = installBtn.dataset.id;
                 const appToInstall = appStoreInventory.find(app => app.id === appId);
                 if (appToInstall) {
                     Gurasuraisu.installApp(appToInstall);
-                    btn.innerHTML = '<span class="material-symbols-rounded">check_circle</span>Installed';
-                    btn.disabled = true;
+                    
+                    // Immediately update UI for responsiveness
+                    alreadyInstalledApps.push(appToInstall.name);
+                    filterAndRender(); // Re-render to show the change
+                }
+            } else if (uninstallBtn) {
+                const appName = uninstallBtn.dataset.name;
+                if (appName) {
+                    // Call the new API function
+                    Gurasuraisu.deleteApp(appName);
+    
+                    // Immediately update UI for responsiveness
+                    alreadyInstalledApps = alreadyInstalledApps.filter(name => name !== appName);
+                    filterAndRender(); // Re-render to show the change
                 }
             }
         });
