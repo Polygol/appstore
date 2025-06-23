@@ -285,6 +285,28 @@
             cursor: not-allowed;
             transform: scale(1);
         }
+        
+        /* Add this new rule to your <style> block */
+        .uninstall-btn {
+            width: 100%;
+            background-color: transparent;
+            color: #ff453a; /* A standard 'destructive action' red */
+            border: 1px solid #ff453a;
+            border-radius: 25px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transform: scale(1);
+        }
+
+        .uninstall-btn:active:not(:disabled) {
+            transform: scale(0.98);
+        }
 
         .material-symbols-rounded {
             font-size: 24px;
@@ -576,6 +598,17 @@
         function saveStoreSources() {
             localStorage.setItem('appStoreSources', JSON.stringify(storeSources));
         }
+
+        function initializeStore() {
+            // 1. First, request the list of installed apps from the parent.
+            // The parent will respond with a 'message' event, which our listener above will catch.
+            if (window.Gurasuraisu) {
+                Gurasuraisu.requestInstalledApps();
+            }
+    
+            // 2. In parallel, start loading the app inventories.
+            loadAllInventories();
+        }
     
         function createAppCard(app) {
             const isInstalled = alreadyInstalledApps.includes(app.name);
@@ -624,7 +657,7 @@
             if (event.origin !== window.location.origin) return;
             if (event.data.type === 'installed-apps-list') {
                 alreadyInstalledApps = event.data.apps;
-                filterAndRender();
+                filterAndRender(); // Re-render now that we know what's installed
             }
         });
     
@@ -652,7 +685,7 @@
             });
         });
     
-        loadAllInventories();
+        initializeStore();
     </script>
 </body>
 </html>
