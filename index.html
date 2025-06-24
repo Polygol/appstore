@@ -630,11 +630,9 @@
             return `
                 <div class="app-card" data-app-name="${app.name}">
                     <div class="app-header">
-                        {/* Use the new 'icon' variable which has a fallback */}
                         <img src="${icon}" alt="${app.name}" class="app-icon" crossorigin="anonymous" referrerpolicy="no-referrer">
                         <div class="app-info">
                             <div class="app-name">${app.name}</div>
-                            {/* Also add a fallback for developer, just in case */}
                             <div class="app-developer">${app.developer || 'Unknown Developer'}</div>
                         </div>
                     </div>
