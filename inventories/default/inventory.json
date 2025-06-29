@@ -108,6 +108,15 @@
             "iconUrl": "/assets/appicon/camera.png",
             "url": "/camera/index.html",
             "filesToCache": ["/camera/index.html", "/assets/appicon/camera.png", "/assets/js/gurasuraisu-api.js"]
+        },
+        {
+            "id": "terminal",
+            "name": "Terminal",
+            "developer": "kirbIndustries",
+            "category": "Other",
+            "iconUrl": "/assets/appicon/terminal.png",
+            "url": "/terminal/index.html",
+            "filesToCache": ["/terminal/index.html", "/assets/appicon/terminal.png", "/assets/js/gurasuraisu-api.js"]
         }
     ]
 }
