@@ -111,7 +111,7 @@
         },
         {
             "id": "terminal",
-            "name": "Terminal",
+            "name": "(Developer) Terminal",
             "developer": "kirbIndustries",
             "category": "Other",
             "iconUrl": "/assets/appicon/terminal.png",
