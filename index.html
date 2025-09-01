@@ -567,6 +567,28 @@
     </div>
 
     <script>
+        function initializeStore() {
+            if (window.Gurasuraisu) {
+                Gurasuraisu.registerWidget({
+                    appName: 'App Store',
+                    widgetId: 'appstore-random-app',
+                    title: 'Random App',
+                    url: '/appstore/widgets/widget-random-app.html',
+                    defaultSize: [1, 1],
+                    openUrl: '/appstore/index.html'
+                });
+            }
+
+            // 1. First, request the list of installed apps from the parent.
+            // The parent will respond with a 'message' event, which our listener above will catch.
+            if (window.Gurasuraisu) {
+                Gurasuraisu.requestInstalledApps();
+            }
+    
+            // 2. In parallel, start loading the app inventories.
+            loadAllInventories();
+        }
+        
         const appGrid = document.getElementById('appGrid');
         const searchInput = document.querySelector('.search-input');
         const categoryBtns = document.querySelectorAll('.tab-btn[data-category]');
