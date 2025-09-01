@@ -750,10 +750,18 @@
         });
     
         function onApiReady() {
-            // 1. First, request the list of installed apps from the parent.
+            // Register all widgets the app provides as soon as the API is ready.
+            Gurasuraisu.registerWidget({
+                appName: 'App Store',
+                widgetId: 'appstore-random-app',
+                title: 'Random App',
+                url: '/appstore/widgets/widget-random-app.html',
+                defaultSize: [1, 1],
+                openUrl: '/appstore/index.html' // Tapping the widget opens the main app
+            });
+
+            // Now, continue with other initializations.
             Gurasuraisu.requestInstalledApps();
-    
-            // 2. In parallel, start loading the app inventories.
             loadAllInventories();
         }
 
