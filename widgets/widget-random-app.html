@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polygol App Store Widget</title>
+    <script src="/assets/gurapp/api/gurasuraisu-api.js"></script>
+    <style>
+        :root {
+            /* These will be inherited from the parent Polygol window */
+            --text-color: #f9f9f9;
+            --secondary-text-color: rgba(255, 255, 255, 0.7);
+            --background-color: #1c1c1c;
+        }
+        body.light-theme {
+            --text-color: #333333;
+            --secondary-text-color: rgba(0, 0, 0, 0.7);
+            --background-color: #f0f0f0;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            color: var(--text-color);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .widget-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            gap: 8px;
+            text-decoration: none; /* Removes underline from link */
+        }
+        .widget-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .widget-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            overflow: hidden;
+        }
+        .app-name {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .app-developer {
+            font-size: 12px;
+            color: var(--secondary-text-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .loading {
+            font-size: 12px;
+            color: var(--secondary-text-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="widget-container" id="widgetContainer">
+        <p class="loading">Loading App...</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Best Practice: Register the widget with Polygol as soon as it loads.
+            if (window.Gurasuraisu) {
+                Gurasuraisu.registerWidget({
+                    appName: 'App Store',
+                    widgetId: 'appstore-random-app',
+                    title: 'Random App',
+                    url: '/appstore/widgets/widget-random-app.html',
+                    defaultSize: [1, 1],
+                    openUrl: '/appstore/index.html' // Tapping the widget opens the main app
+                });
+            }
+
+            const widgetContainer = document.getElementById('widgetContainer');
+
+            // Best Practice: Use the same data sources as the main application.
+            let storeSources = JSON.parse(localStorage.getItem('appStoreSources')) || [
+                "/appstore/inventories/default/inventory.json",
+                "/glucose-gurapps/inventory.json"
+            ];
+
+            async function fetchInventory(url) {
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) return [];
+                    const data = await response.json();
+                    return data.apps || [];
+                } catch (error) {
+                    console.error(`Widget: Failed to fetch from ${url}`, error);
+                    return [];
+                }
+            }
+
+            async function loadAndDisplayRandomApp() {
+                const allFetchPromises = storeSources.map(fetchInventory);
+                const allInventories = await Promise.all(allFetchPromises);
+                const allApps = allInventories.flat();
+
+                if (allApps.length === 0) {
+                    widgetContainer.innerHTML = '<p class="loading">No apps found.</p>';
+                    return;
+                }
+
+                const randomIndex = Math.floor(Math.random() * allApps.length);
+                const randomApp = allApps[randomIndex];
+                const icon = randomApp.iconUrl || '/assets/appicon/default.png';
+
+                widgetContainer.innerHTML = `
+                    <img src="${icon}" class="widget-icon">
+                    <div class="widget-info">
+                        <div class="app-name">${randomApp.name}</div>
+                        <div class="app-developer">${randomApp.developer || 'Unknown'}</div>
+                    </div>
+                `;
+            }
+
+            loadAndDisplayRandomApp();
+        });
+    </script>
+</body>
+</html>
