@@ -228,8 +228,6 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            flex-direction: row;
-            flex-wrap: wrap;
         }
 
         .app-icon {
@@ -267,7 +265,7 @@
         }
 
         .install-btn {
-            width: auto;
+            width: 100%;
             background-color: var(--text-color);
             color: var(--background-color);
             border: 1px solid var(--text-color);
@@ -688,8 +686,8 @@
                             <div class="app-name">${app.name}</div>
                             <div class="app-developer">${app.developer || 'Unknown Developer'}</div>
                         </div>
-                        ${buttonHtml}
                     </div>
+                    ${buttonHtml}
                 </div>
             `;
         }
