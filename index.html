@@ -650,28 +650,6 @@
         function saveStoreSources() {
             localStorage.setItem('appStoreSources', JSON.stringify(storeSources));
         }
-
-        function initializeStore() {
-            if (window.Gurasuraisu) {
-                Gurasuraisu.registerWidget({
-                    appName: 'App Store',
-                    widgetId: 'appstore-random-app',
-                    title: 'Random App',
-                    url: '/appstore/widgets/widget-random-app.html',
-                    defaultSize: [1, 1],
-                    openUrl: '/appstore/index.html'
-                });
-            }
-
-            // 1. First, request the list of installed apps from the parent.
-            // The parent will respond with a 'message' event, which our listener above will catch.
-            if (window.Gurasuraisu) {
-                Gurasuraisu.requestInstalledApps();
-            }
-    
-            // 2. In parallel, start loading the app inventories.
-            loadAllInventories();
-        }
     
         function createAppCard(app) {
             const isInstalled = alreadyInstalledApps.includes(app.name);
@@ -771,7 +749,21 @@
             });
         });
     
-        initializeStore();
+        function onApiReady() {
+            // 1. First, request the list of installed apps from the parent.
+            Gurasuraisu.requestInstalledApps();
+    
+            // 2. In parallel, start loading the app inventories.
+            loadAllInventories();
+        }
+
+        // Check if the API script has already loaded and fired its event
+        if (window.Gurasuraisu) {
+            onApiReady();
+        } else {
+            // Otherwise, wait for the custom event from gurasuraisu-api.js
+            window.addEventListener('GurasuraisuReady', onApiReady);
+        }
     </script>
 </body>
 </html>
