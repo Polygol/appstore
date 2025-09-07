@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
+            --sun-shadow: none;
             --edge-refraction-filter: url('#edge-refraction-only');
             
             /* Dark Theme (Default) Variables */
@@ -163,6 +164,7 @@
             align-items: center;
             gap: 8px;
             backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
+            box-shadow: var(--sun-shadow);
             border: 1px solid var(--glass-border);
         }
 
@@ -195,6 +197,7 @@
             display: flex;
             align-items: center;
             backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
+            box-shadow: var(--sun-shadow);
             border: 1px solid var(--glass-border);
             outline: none;
             font-family: 'Inter', sans-serif;
@@ -377,7 +380,7 @@
             max-width: 600px;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px) saturate(2) var(--edge-refraction-filter);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--sun-shadow), 0 0 50px rgba(0, 0, 0, 0.2);
             max-height: 80vh;
             overflow-y: auto;
         }
