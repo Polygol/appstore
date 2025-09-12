@@ -229,6 +229,8 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
+            box-shadow: var(--sun-shadow);
         }
 
         .app-header {
@@ -286,6 +288,12 @@
             justify-content: center;
             gap: 6px;
             transform: scale(1);
+            box-shadow: var(--sun-shadow);
+        }
+
+        .install-btn .material-symbols-rounded {
+            color: var(--background-color);
+            font-size: 18px;
         }
         
         .install-btn:active:not(:disabled) {
@@ -305,7 +313,7 @@
             width: 100%;
             background-color: transparent;
             color: #ff453a; /* A standard 'destructive action' red */
-            border: 1px solid #ff453a;
+            border: 1px solid var(--glass-border);
             border-radius: 25px;
             padding: 10px 15px;
             cursor: pointer;
@@ -314,8 +322,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
             transform: scale(1);
+            box-shadow: var(--sun-shadow);
+        }
+
+        .uninstall-btn .material-symbols-rounded {
+            color: #ff453a; /* A standard 'destructive action' red */
+            font-size: 18px;
         }
 
         .uninstall-btn:active:not(:disabled) {
