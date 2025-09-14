@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,700,1,0" />
     <script src="/assets/gurapp/api/gurasuraisu-api.js" defer></script>
+    <script src="/assets/gurapp/lang-app.js"></script>
+    <script src="lang.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
@@ -551,27 +553,27 @@
             <input type="text" class="search-input" placeholder="Search">
             <button class="tab-btn active" data-category="All">
                 <span class="material-symbols-rounded">grid_view</span>
-                All
+                <span data-lang-key="ALL">All</span>
             </button>
             <button class="tab-btn" data-category="Tools">
                 <span class="material-symbols-rounded">automation</span>
-                Tools
+                <span data-lang-key="TOOLS">Tools</span>
             </button>
             <button class="tab-btn" data-category="Community">
                 <span class="material-symbols-rounded">group</span>
-                Social
+                <span data-lang-key="SOCIAL">Social</span>
             </button>
             <button class="tab-btn" data-category="Entertainment">
                 <span class="material-symbols-rounded">attractions</span>
-                Play
+                <span data-lang-key="PLAY">Play</span>
             </button>
             <button class="tab-btn" data-category="Other">
                 <span class="material-symbols-rounded">category</span>
-                Other
+                <span data-lang-key="OTHER">Other</span>
             </button>
             <button class="tab-btn" id="addStoreBtn">
                 <span class="material-symbols-rounded">add</span>
-                Add Store
+                <span data-lang-key="ADD_STORE_BTN_TEXT">Add Store</span>
             </button>
         </div>
 
@@ -584,14 +586,14 @@
     <div class="create-modal" id="addStoreModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add External App Store</h2>
+                <h2 class="modal-title" data-lang-key="ADD_STORE_TITLE">Add External App Store</h2>
             </div>
-            <div style="margin-bottom: 20px;">Using an unverified external App Store is at your own risk. It is recommended to only use kirbIndustries <a href="https://kirbindustries.gitbook.io/polygol/gurapps/verified-external-app-stores" target="_blank">verified stores</a>.</div>
+            <div style="margin-bottom: 20px;" data-lang-key="ADD_STORE_DESC"></div>
             <div class="form-group">
-                <label class="form-label">App Store URL</label>
-                <input type="url" class="form-input" id="storeUrlInput" placeholder="Add a valid Polygol App Store inventory URL" required>
+                <label class="form-label" data-lang-key="ADD_STORE_URL_LABEL"></label>
+                <input type="url" class="form-input" id="storeUrlInput" data-lang-placeholder="ADD_STORE_URL_PLACEHOLDER" required>
             </div>
-            <button class="submit-btn" id="submitStore">Add Store</button>
+            <button class="submit-btn" id="submitStore" data-lang-key="ADD_STORE_BTN"></button>
         </div>
     </div>
 
@@ -633,7 +635,7 @@
                 storeUrlInput.value = '';
                 addStoreModal.classList.remove('show');
                 if (window.Gurasuraisu) {
-                    Gurasuraisu.showPopup('App store added successfully');
+                    Gurasuraisu.showPopup(Gurasuraisu.getString('STORE_ADDED_SUCCESS'));
                 }
             }
         });
@@ -657,7 +659,7 @@
             } catch (error) {
                 console.error(`Failed to fetch or parse inventory from ${url}:`, error);
                 if (window.Gurasuraisu) {
-                    Gurasuraisu.showPopup(`Error loading store: ${url}`);
+                    Gurasuraisu.showPopup(Gurasuraisu.getString('LOADING_STORE_ERROR') + ` ${url}`);
                 }
                 return [];
             }
@@ -677,18 +679,15 @@
     
         function createAppCard(app) {
             const isInstalled = alreadyInstalledApps.includes(app.name);
-        
-            // Provide a fallback icon path. 
             const icon = app.iconUrl || '/assets/appicon/default.png'; 
-        
             const buttonHtml = isInstalled
                 ? `<button class="uninstall-btn" data-name="${app.name}">
                        <span class="material-symbols-rounded">delete</span>
-                       Uninstall
+                       <span data-lang-key="UNINSTALL"></span>
                    </button>`
                 : `<button class="install-btn" data-id="${app.id}">
                        <span class="material-symbols-rounded">download</span>
-                       Install
+                       <span data-lang-key="INSTALL"></span>
                    </button>`;
         
             return `
@@ -697,7 +696,7 @@
                         <img src="${icon}" alt="${app.name}" class="app-icon" crossorigin="anonymous" referrerpolicy="no-referrer">
                         <div class="app-info">
                             <div class="app-name">${app.name}</div>
-                            <div class="app-developer">${app.developer || 'Unknown Developer'}</div>
+                            <div class="app-developer">${app.developer || Gurasuraisu.getString('DEVELOPER')}</div>
                         </div>
                     </div>
                     ${buttonHtml}
@@ -712,7 +711,7 @@
             if (searchTerm) {
                 filteredApps = filteredApps.filter(app => 
                     app.name.toLowerCase().includes(searchTerm) || 
-                    app.developer.toLowerCase().includes(searchTerm)
+                    (app.developer && app.developer.toLowerCase().includes(searchTerm))
                 );
             }
     
@@ -723,8 +722,10 @@
             if(filteredApps.length > 0) {
                  appGrid.innerHTML = filteredApps.map(app => createAppCard(app)).join('');
             } else {
-                 appGrid.innerHTML = `<div class="no-apps-message">No apps found</div>`;
+                 appGrid.innerHTML = `<div class="no-apps-message" data-lang-key="NO_APPS_FOUND"></div>`;
             }
+            // Apply translations to the newly rendered content
+            Gurasuraisu.applyTranslations();
         }
     
         window.addEventListener('message', (event) => {
