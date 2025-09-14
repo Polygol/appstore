@@ -783,14 +783,29 @@
                 title: 'Random App',
                 url: '/appstore/widgets/widget-random-app.html',
                 defaultSize: [1, 1],
-                openUrl: '/appstore/index.html' // Tapping the widget opens the main app
+                openUrl: '/appstore/index.html'
             });
 
-            // Now, continue with other initializations.
+            // Register this app's specific language pack with the API.
+            if (window.Gurasuraisu && Gurasuraisu._registerAppLangPack) {
+                Gurasuraisu._registerAppLangPack({
+                    EN: LANG_EN_APPSTORE,
+                    JP: LANG_JP_APPSTORE,
+                    DE: LANG_DE_APPSTORE,
+                    ES: LANG_ES_APPSTORE,
+                    KO: LANG_KO_APPSTORE,
+                    ZH: LANG_ZH_APPSTORE
+                });
+            }
+
+            // --- FINAL FIX: SIGNAL THAT THE APP IS FULLY READY ---
+            // This event tells gurasuraisu-api.js to now perform the language setup.
+            const appReadyEvent = new CustomEvent('GurappReady');
+            window.dispatchEvent(appReadyEvent);
+
+            // Now, continue with other initializations that need the API.
             Gurasuraisu.requestInstalledApps();
             loadAllInventories();
-
-            
         }
 
         // Check if the API script has already loaded and fired its event
@@ -799,17 +814,6 @@
         } else {
             // Otherwise, wait for the custom event from gurasuraisu-api.js
             window.addEventListener('GurasuraisuReady', onApiReady);
-        }
-
-        if (window.Gurasuraisu && Gurasuraisu._registerAppLangPack) {
-            Gurasuraisu._registerAppLangPack({
-                EN: LANG_EN_APPSTORE,
-                JP: LANG_JP_APPSTORE,
-                DE: LANG_DE_APPSTORE,
-                ES: LANG_ES_APPSTORE,
-                KO: LANG_KO_APPSTORE,
-                ZH: LANG_ZH_APPSTORE
-            });
         }
     </script>
 </body>
