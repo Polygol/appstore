@@ -776,17 +776,10 @@
         });
     
         function onApiReady() {
-            // Register all widgets the app provides as soon as the API is ready.
-            Gurasuraisu.registerWidget({
-                appName: 'App Store',
-                widgetId: 'appstore-random-app',
-                title: 'Random App',
-                url: '/appstore/widgets/widget-random-app.html',
-                defaultSize: [1, 1],
-                openUrl: '/appstore/index.html'
-            });
+            // This function is now the safe entry point for all API interactions.
 
-            // Register this app's specific language pack with the API.
+            // 1. Register this app's language pack. This is the crucial step that
+            // triggers the API to perform the full, correct translation.
             if (window.Gurasuraisu && Gurasuraisu._registerAppLangPack) {
                 Gurasuraisu._registerAppLangPack({
                     EN: LANG_EN_APPSTORE,
@@ -798,21 +791,25 @@
                 });
             }
 
-            // --- FINAL FIX: SIGNAL THAT THE APP IS FULLY READY ---
-            // This event tells gurasuraisu-api.js to now perform the language setup.
-            const appReadyEvent = new CustomEvent('GurappReady');
-            window.dispatchEvent(appReadyEvent);
+            // 2. Now proceed with the rest of your app's setup.
+            Gurasuraisu.registerWidget({
+                appName: 'App Store',
+                widgetId: 'appstore-random-app',
+                title: 'Random App',
+                url: '/appstore/widgets/widget-random-app.html',
+                defaultSize: [1, 1],
+                openUrl: '/appstore/index.html'
+            });
 
-            // Now, continue with other initializations that need the API.
             Gurasuraisu.requestInstalledApps();
             loadAllInventories();
         }
 
-        // Check if the API script has already loaded and fired its event
+        // --- CORRECTED INITIALIZATION LOGIC ---
+        // This reliably waits for the API to be fully loaded before calling onApiReady.
         if (window.Gurasuraisu) {
             onApiReady();
         } else {
-            // Otherwise, wait for the custom event from gurasuraisu-api.js
             window.addEventListener('GurasuraisuReady', onApiReady);
         }
     </script>
