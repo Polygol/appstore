@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,700,1,0" />
     <script src="/assets/gurapp/api/gurasuraisu-api.js" defer></script>
+    <script>window.APP_LANG_PREFIX = 'APPSTORE';</script>
+    <script src="lang.js" defer></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
@@ -510,7 +512,7 @@
         }
     </style>
 </head>
-<body>
+<body data-app-name="APPSTORE">
     <svg style="display: none">
         <filter id="edge-refraction-only" color-interpolation-filters="linearRGB">
             <!-- Part 1: Create the turbulence noise that will displace the pixels -->
@@ -548,30 +550,30 @@
     
     <div class="content">
         <div class="toolbar">
-            <input type="text" class="search-input" placeholder="Search">
+            <input type="text" class="search-input" data-lang-key-placeholder="SEARCH_PLACEHOLDER">
             <button class="tab-btn active" data-category="All">
                 <span class="material-symbols-rounded">grid_view</span>
-                All
+                <span data-lang-key="ALL"></span>
             </button>
             <button class="tab-btn" data-category="Tools">
                 <span class="material-symbols-rounded">automation</span>
-                Tools
+                <span data-lang-key="TOOLS"></span>
             </button>
             <button class="tab-btn" data-category="Community">
                 <span class="material-symbols-rounded">group</span>
-                Social
+                <span data-lang-key="SOCIAL"></span>
             </button>
             <button class="tab-btn" data-category="Entertainment">
                 <span class="material-symbols-rounded">attractions</span>
-                Play
+                <span data-lang-key="PLAY"></span>
             </button>
             <button class="tab-btn" data-category="Other">
                 <span class="material-symbols-rounded">category</span>
-                Other
+                <span data-lang-key="OTHER"></span>
             </button>
             <button class="tab-btn" id="addStoreBtn">
                 <span class="material-symbols-rounded">add</span>
-                Add Store
+                <span data-lang-key="ADD_STORE_BTN"></span>
             </button>
         </div>
 
@@ -584,14 +586,14 @@
     <div class="create-modal" id="addStoreModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add External App Store</h2>
+                <h2 class="modal-title" data-lang-key="ADD_STORE_TITLE"></h2>
             </div>
-            <div style="margin-bottom: 20px;">Using an unverified external App Store is at your own risk. It is recommended to only use kirbIndustries <a href="https://kirbindustries.gitbook.io/polygol/gurapps/verified-external-app-stores" target="_blank">verified stores</a>.</div>
+            <div style="margin-bottom: 20px;" data-lang-key="ADD_STORE_DESC"></div>
             <div class="form-group">
-                <label class="form-label">App Store URL</label>
-                <input type="url" class="form-input" id="storeUrlInput" placeholder="Add a valid Polygol App Store inventory URL" required>
+                <label class="form-label" data-lang-key="ADD_STORE_URL_LABEL"></label>
+                <input type="url" class="form-input" id="storeUrlInput" data-lang-key-placeholder="ADD_STORE_URL_PLACEHOLDER" required>
             </div>
-            <button class="submit-btn" id="submitStore">Add Store</button>
+            <button class="submit-btn" id="submitStore" data-lang-key="ADD_STORE_BTN"></button>
         </div>
     </div>
 
