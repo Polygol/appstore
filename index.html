@@ -6,9 +6,7 @@
     <title>App Store only works with Polygol.</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,700,1,0" />
-    <script src="/assets/gurapp/api/gurasuraisu-api.js"></script>
-    <script src="/assets/gurapp/lang-app.js"></script>
-    <script src="lang.js"></script>
+    <script src="/assets/gurapp/api/gurasuraisu-api.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
@@ -512,7 +510,7 @@
         }
     </style>
 </head>
-<body data-app-name="APPSTORE">
+<body>
     <svg style="display: none">
         <filter id="edge-refraction-only" color-interpolation-filters="linearRGB">
             <!-- Part 1: Create the turbulence noise that will displace the pixels -->
@@ -550,30 +548,30 @@
     
     <div class="content">
         <div class="toolbar">
-            <input type="text" class="search-input" data-lang-placeholder="SEARCH_PLACEHOLDER">
+            <input type="text" class="search-input" placeholder="Search">
             <button class="tab-btn active" data-category="All">
                 <span class="material-symbols-rounded">grid_view</span>
-                <span data-lang-key="ALL">All</span>
+                All
             </button>
             <button class="tab-btn" data-category="Tools">
                 <span class="material-symbols-rounded">automation</span>
-                <span data-lang-key="TOOLS">Tools</span>
+                Tools
             </button>
             <button class="tab-btn" data-category="Community">
                 <span class="material-symbols-rounded">group</span>
-                <span data-lang-key="SOCIAL">Social</span>
+                Social
             </button>
             <button class="tab-btn" data-category="Entertainment">
                 <span class="material-symbols-rounded">attractions</span>
-                <span data-lang-key="PLAY">Play</span>
+                Play
             </button>
             <button class="tab-btn" data-category="Other">
                 <span class="material-symbols-rounded">category</span>
-                <span data-lang-key="OTHER">Other</span>
+                Other
             </button>
             <button class="tab-btn" id="addStoreBtn">
                 <span class="material-symbols-rounded">add</span>
-                <span data-lang-key="ADD_STORE_BTN_TEXT">Add Store</span>
+                Add Store
             </button>
         </div>
 
@@ -586,14 +584,14 @@
     <div class="create-modal" id="addStoreModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" data-lang-key="ADD_STORE_TITLE">Add External App Store</h2>
+                <h2 class="modal-title">Add External App Store</h2>
             </div>
-            <div style="margin-bottom: 20px;" data-lang-key="ADD_STORE_DESC"></div>
+            <div style="margin-bottom: 20px;">Using an unverified external App Store is at your own risk. It is recommended to only use kirbIndustries <a href="https://kirbindustries.gitbook.io/polygol/gurapps/verified-external-app-stores" target="_blank">verified stores</a>.</div>
             <div class="form-group">
-                <label class="form-label" data-lang-key="ADD_STORE_URL_LABEL"></label>
-                <input type="url" class="form-input" id="storeUrlInput" data-lang-placeholder="ADD_STORE_URL_PLACEHOLDER" required>
+                <label class="form-label">App Store URL</label>
+                <input type="url" class="form-input" id="storeUrlInput" placeholder="Add a valid Polygol App Store inventory URL" required>
             </div>
-            <button class="submit-btn" id="submitStore" data-lang-key="ADD_STORE_BTN"></button>
+            <button class="submit-btn" id="submitStore">Add Store</button>
         </div>
     </div>
 
@@ -618,7 +616,6 @@
         // Modal functionality
         addStoreBtn.addEventListener('click', () => {
             addStoreModal.classList.add('show');
-            
         });
 
         addStoreModal.addEventListener('click', (e) => {
@@ -636,7 +633,7 @@
                 storeUrlInput.value = '';
                 addStoreModal.classList.remove('show');
                 if (window.Gurasuraisu) {
-                    Gurasuraisu.showPopup(Gurasuraisu.getString('STORE_ADDED_SUCCESS'));
+                    Gurasuraisu.showPopup('App store added successfully');
                 }
             }
         });
@@ -660,7 +657,7 @@
             } catch (error) {
                 console.error(`Failed to fetch or parse inventory from ${url}:`, error);
                 if (window.Gurasuraisu) {
-                    Gurasuraisu.showPopup(Gurasuraisu.getString('LOADING_STORE_ERROR') + ` ${url}`);
+                    Gurasuraisu.showPopup(`Error loading store: ${url}`);
                 }
                 return [];
             }
@@ -680,15 +677,18 @@
     
         function createAppCard(app) {
             const isInstalled = alreadyInstalledApps.includes(app.name);
+        
+            // Provide a fallback icon path. 
             const icon = app.iconUrl || '/assets/appicon/default.png'; 
+        
             const buttonHtml = isInstalled
                 ? `<button class="uninstall-btn" data-name="${app.name}">
                        <span class="material-symbols-rounded">delete</span>
-                       <span data-lang-key="UNINSTALL"></span>
+                       Uninstall
                    </button>`
                 : `<button class="install-btn" data-id="${app.id}">
                        <span class="material-symbols-rounded">download</span>
-                       <span data-lang-key="INSTALL"></span>
+                       Install
                    </button>`;
         
             return `
@@ -697,7 +697,7 @@
                         <img src="${icon}" alt="${app.name}" class="app-icon" crossorigin="anonymous" referrerpolicy="no-referrer">
                         <div class="app-info">
                             <div class="app-name">${app.name}</div>
-                            <div class="app-developer">${app.developer || Gurasuraisu.getString('DEVELOPER')}</div>
+                            <div class="app-developer">${app.developer || 'Unknown Developer'}</div>
                         </div>
                     </div>
                     ${buttonHtml}
@@ -712,7 +712,7 @@
             if (searchTerm) {
                 filteredApps = filteredApps.filter(app => 
                     app.name.toLowerCase().includes(searchTerm) || 
-                    (app.developer && app.developer.toLowerCase().includes(searchTerm))
+                    app.developer.toLowerCase().includes(searchTerm)
                 );
             }
     
@@ -723,10 +723,8 @@
             if(filteredApps.length > 0) {
                  appGrid.innerHTML = filteredApps.map(app => createAppCard(app)).join('');
             } else {
-                 appGrid.innerHTML = `<div class="no-apps-message" data-lang-key="NO_APPS_FOUND"></div>`;
+                 appGrid.innerHTML = `<div class="no-apps-message">No apps found</div>`;
             }
-            // Apply translations to the newly rendered content
-            
         }
     
         window.addEventListener('message', (event) => {
@@ -776,40 +774,26 @@
         });
     
         function onApiReady() {
-            // This function is now the safe entry point for all API interactions.
-
-            // 1. Register this app's language pack. This is the crucial step that
-            // triggers the API to perform the full, correct translation.
-            if (window.Gurasuraisu && Gurasuraisu._registerAppLangPack) {
-                Gurasuraisu._registerAppLangPack({
-                    EN: LANG_EN_APPSTORE,
-                    JP: LANG_JP_APPSTORE,
-                    DE: LANG_DE_APPSTORE,
-                    ES: LANG_ES_APPSTORE,
-                    KO: LANG_KO_APPSTORE,
-                    ZH: LANG_ZH_APPSTORE
-                });
-            }
-
-            // 2. Now proceed with the rest of your app's setup.
+            // Register all widgets the app provides as soon as the API is ready.
             Gurasuraisu.registerWidget({
                 appName: 'App Store',
                 widgetId: 'appstore-random-app',
                 title: 'Random App',
                 url: '/appstore/widgets/widget-random-app.html',
                 defaultSize: [1, 1],
-                openUrl: '/appstore/index.html'
+                openUrl: '/appstore/index.html' // Tapping the widget opens the main app
             });
 
+            // Now, continue with other initializations.
             Gurasuraisu.requestInstalledApps();
             loadAllInventories();
         }
 
-        // --- CORRECTED INITIALIZATION LOGIC ---
-        // This reliably waits for the API to be fully loaded before calling onApiReady.
+        // Check if the API script has already loaded and fired its event
         if (window.Gurasuraisu) {
             onApiReady();
         } else {
+            // Otherwise, wait for the custom event from gurasuraisu-api.js
             window.addEventListener('GurasuraisuReady', onApiReady);
         }
     </script>
