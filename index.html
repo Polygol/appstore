@@ -618,6 +618,7 @@
         // Modal functionality
         addStoreBtn.addEventListener('click', () => {
             addStoreModal.classList.add('show');
+            Gurasuraisu.applyTranslations();
         });
 
         addStoreModal.addEventListener('click', (e) => {
@@ -788,6 +789,8 @@
             // Now, continue with other initializations.
             Gurasuraisu.requestInstalledApps();
             loadAllInventories();
+
+            Gurasuraisu.applyTranslations();
         }
 
         // Check if the API script has already loaded and fired its event
