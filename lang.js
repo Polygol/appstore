@@ -1,4 +1,4 @@
-const LANG_EN_APPSTORE = {
+const window.LANG_EN_APPSTORE = {
     ADD_STORE_TITLE: "Add External App Store",
     ADD_STORE_DESC: "Using an unverified external App Store is at your own risk. It is recommended to only use kirbIndustries verified stores.",
     ADD_STORE_URL_LABEL: "App Store URL",
@@ -11,7 +11,7 @@ const LANG_EN_APPSTORE = {
     NO_APPS_FOUND: "No apps found"
 };
 
-const LANG_JP_APPSTORE = {
+const window.LANG_JP_APPSTORE = {
     ADD_STORE_TITLE: "外部アプリストアを追加",
     ADD_STORE_DESC: "未確認の外部アプリストアの使用は自己責任です。kirbIndustriesが確認したストアのみを使用することをお勧めします。",
     ADD_STORE_URL_LABEL: "アプリストアのURL",
@@ -24,7 +24,7 @@ const LANG_JP_APPSTORE = {
     NO_APPS_FOUND: "アプリが見つかりません"
 };
 
-const LANG_DE_APPSTORE = {
+const window.LANG_DE_APPSTORE = {
     ADD_STORE_TITLE: "Externen App Store hinzufügen",
     ADD_STORE_DESC: "Die Verwendung eines nicht verifizierten externen App Stores erfolgt auf eigene Gefahr. Es wird empfohlen, nur von kirbIndustries verifizierte Stores zu verwenden.",
     ADD_STORE_URL_LABEL: "App Store URL",
@@ -37,7 +37,7 @@ const LANG_DE_APPSTORE = {
     NO_APPS_FOUND: "Keine Apps gefunden"
 };
 
-const LANG_ES_APPSTORE = {
+const window.LANG_ES_APPSTORE = {
     ADD_STORE_TITLE: "Añadir tienda de aplicaciones externa",
     ADD_STORE_DESC: "El uso de una tienda de aplicaciones externa no verificada es bajo su propio riesgo. Se recomienda utilizar únicamente tiendas verificadas por kirbIndustries.",
     ADD_STORE_URL_LABEL: "URL de la tienda de aplicaciones",
@@ -50,7 +50,7 @@ const LANG_ES_APPSTORE = {
     NO_APPS_FOUND: "No se encontraron aplicaciones"
 };
 
-const LANG_KO_APPSTORE = {
+const window.LANG_KO_APPSTORE = {
     ADD_STORE_TITLE: "외부 앱 스토어 추가",
     ADD_STORE_DESC: "확인되지 않은 외부 앱 스토어 사용에 따른 책임은 본인에게 있습니다. kirbIndustries에서 확인한 스토어만 사용하는 것을 권장합니다.",
     ADD_STORE_URL_LABEL: "앱 스토어 URL",
@@ -63,7 +63,7 @@ const LANG_KO_APPSTORE = {
     NO_APPS_FOUND: "앱을 찾을 수 없습니다"
 };
 
-const LANG_ZH_APPSTORE = {
+const window.LANG_ZH_APPSTORE = {
     ADD_STORE_TITLE: "添加外部应用商店",
     ADD_STORE_DESC: "使用未经核实的外部应用商店需自担风险。建议仅使用经kirbIndustries核实的商店。",
     ADD_STORE_URL_LABEL: "应用商店URL",
