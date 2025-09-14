@@ -618,7 +618,7 @@
         // Modal functionality
         addStoreBtn.addEventListener('click', () => {
             addStoreModal.classList.add('show');
-            Gurasuraisu.applyTranslations();
+            
         });
 
         addStoreModal.addEventListener('click', (e) => {
@@ -726,7 +726,7 @@
                  appGrid.innerHTML = `<div class="no-apps-message" data-lang-key="NO_APPS_FOUND"></div>`;
             }
             // Apply translations to the newly rendered content
-            Gurasuraisu.applyTranslations();
+            
         }
     
         window.addEventListener('message', (event) => {
@@ -790,7 +790,7 @@
             Gurasuraisu.requestInstalledApps();
             loadAllInventories();
 
-            Gurasuraisu.applyTranslations();
+            
         }
 
         // Check if the API script has already loaded and fired its event
