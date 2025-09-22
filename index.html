@@ -307,9 +307,31 @@
             cursor: not-allowed;
             transform: scale(1);
         }
+
+        .update-btn {
+            flex-grow: 1;
+            background-color: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transform: scale(1);
+            box-shadow: var(--sun-shadow);
+        }
+        
+        .update-btn .material-symbols-rounded {
+            font-size: 18px;
+        }
         
         /* Add this new rule to your <style> block */
         .uninstall-btn {
+            flex-grow: 1;
             width: 100%;
             background-color: transparent;
             color: #ff453a; /* A standard 'destructive action' red */
@@ -605,7 +627,7 @@
         const storeUrlInput = document.getElementById('storeUrlInput');
     
         let appStoreInventory = [];
-        let alreadyInstalledApps = [];
+        let installedAppsInfo = {};
         let currentCategory = 'All';
     
         let storeSources = JSON.parse(localStorage.getItem('appStoreSources')) || [
@@ -676,20 +698,37 @@
         }
     
         function createAppCard(app) {
-            const isInstalled = alreadyInstalledApps.includes(app.name);
-        
-            // Provide a fallback icon path. 
+            const installedVersion = installedAppsInfo[app.name];
+            const isInstalled = !!installedVersion;
+            
+            // Check for updates by comparing file lists (more reliable than version numbers)
+            const hasUpdate = isInstalled && 
+                              app.filesToCache && 
+                              installedVersion.filesToCache &&
+                              app.filesToCache.sort().toString() !== installedVersion.filesToCache.sort().toString();
+    
             const icon = app.iconUrl || '/assets/appicon/default.png'; 
         
-            const buttonHtml = isInstalled
-                ? `<button class="uninstall-btn" data-name="${app.name}">
-                       <span class="material-symbols-rounded">delete</span>
-                       Uninstall
-                   </button>`
-                : `<button class="install-btn" data-id="${app.id}">
-                       <span class="material-symbols-rounded">download</span>
-                       Install
-                   </button>`;
+            let buttonHtml = '';
+            if (isInstalled) {
+                buttonHtml += `<div class="app-actions">`;
+                if (hasUpdate) {
+                    buttonHtml += `<button class="update-btn" data-id="${app.id}">
+                                       <span class="material-symbols-rounded">update</span>
+                                       Update
+                                   </button>`;
+                }
+                buttonHtml += `<button class="uninstall-btn" data-name="${app.name}">
+                                   <span class="material-symbols-rounded">delete</span>
+                                   Uninstall
+                               </button>`;
+                buttonHtml += `</div>`;
+            } else {
+                buttonHtml = `<button class="install-btn" data-id="${app.id}">
+                               <span class="material-symbols-rounded">download</span>
+                               Install
+                           </button>`;
+            }
         
             return `
                 <div class="app-card" data-app-name="${app.name}">
@@ -730,33 +769,39 @@
         window.addEventListener('message', (event) => {
             if (event.origin !== window.location.origin) return;
             if (event.data.type === 'installed-apps-list') {
-                alreadyInstalledApps = event.data.apps;
-                filterAndRender(); // Re-render now that we know what's installed
+                installedAppsInfo = event.data.apps || {}; // Expect an object now
+                filterAndRender(); // Re-render with version info
             }
         });
-    
+        
         appGrid.addEventListener('click', (e) => {
             const installBtn = e.target.closest('.install-btn');
+            const updateBtn = e.target.closest('.update-btn');
             const uninstallBtn = e.target.closest('.uninstall-btn');
     
-            if (installBtn && !installBtn.disabled) {
-                const appId = installBtn.dataset.id;
+            // Handle both Install and Update, as they call the same function
+            const actionBtn = installBtn || updateBtn;
+            if (actionBtn && !actionBtn.disabled) {
+                const appId = actionBtn.dataset.id;
                 const appToInstall = appStoreInventory.find(app => app.id === appId);
                 if (appToInstall) {
+                    // The parent's installApp function handles both installing and updating
                     Gurasuraisu.installApp(appToInstall);
                     
                     // Immediately update UI for responsiveness
-                    alreadyInstalledApps.push(appToInstall.name);
+                    installedAppsInfo[appToInstall.name] = { 
+                        version: appToInstall.version,
+                        filesToCache: appToInstall.filesToCache
+                    };
                     filterAndRender(); // Re-render to show the change
                 }
             } else if (uninstallBtn) {
                 const appName = uninstallBtn.dataset.name;
                 if (appName) {
-                    // Call the new API function
                     Gurasuraisu.deleteApp(appName);
     
                     // Immediately update UI for responsiveness
-                    alreadyInstalledApps = alreadyInstalledApps.filter(name => name !== appName);
+                    delete installedAppsInfo[appName];
                     filterAndRender(); // Re-render to show the change
                 }
             }
