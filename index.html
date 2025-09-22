@@ -788,9 +788,8 @@
                     // The parent's installApp function handles both installing and updating
                     Gurasuraisu.installApp(appToInstall);
                     
-                    // Immediately update UI for responsiveness
+                    // Immediately update UI for responsiveness, now without version
                     installedAppsInfo[appToInstall.name] = { 
-                        version: appToInstall.version,
                         filesToCache: appToInstall.filesToCache
                     };
                     filterAndRender(); // Re-render to show the change
