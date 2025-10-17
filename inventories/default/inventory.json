@@ -61,8 +61,8 @@
             "developer": "kirbIndustries",
             "category": "Entertainment",
             "iconUrl": "/appstore/inventories/default/appicon/streams.png",
-            "url": "/streams/index.html",
-            "filesToCache": ["/streams/index.html", "/appstore/inventories/default/appicon/streams.png", "/assets/gurapp/api/gurasuraisu-api.js", "https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"]
+            "url": "https://kirbindustries.github.io/streams/index.html",
+            "filesToCache": ["https://kirbindustries.github.io/streams/index.html", "/appstore/inventories/default/appicon/streams.png", "/assets/gurapp/api/gurasuraisu-api.js", "https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"]
         },
         {
             "id": "clapper",
