@@ -632,6 +632,13 @@
             "/glucose-gurapps/inventory.json"
         ];
 
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
         // Modal functionality
         addStoreBtn.addEventListener('click', () => {
             addStoreModal.classList.add('show');
@@ -686,7 +693,36 @@
             appGrid.innerHTML = `<div class="loading-message"><svg width="24" height="24" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: var(--text-color);"><style>.spinner_V8m1{transform-origin:center;animation:spinner_zKoa 2s linear infinite}.spinner_V8m1 circle{stroke-linecap:round;animation:spinner_YpZS 1.5s ease-in-out infinite}@keyframes spinner_zKoa{100%{transform:rotate(360deg)}}@keyframes spinner_YpZS{0%{stroke-dasharray:0 150;stroke-dashoffset:0}47.5%{stroke-dasharray:42 150;stroke-dashoffset:-16}95%,100%{stroke-dasharray:42 150;stroke-dashoffset:-59}}</style><g class="spinner_V8m1"><circle cx="12" cy="12" r="9.5" fill="none" stroke-width="3"></circle></g></svg></div>`;
             const allFetchPromises = storeSources.map(url => fetchInventory(url));
             const allInventories = await Promise.all(allFetchPromises);
-            appStoreInventory = allInventories.flatMap(inventory => (inventory && inventory.apps) ? inventory.apps : []);
+            const rawInventory = allInventories.flatMap(inventory => (inventory && inventory.apps) ? inventory.apps : []);
+    
+            const today = new Date().toISOString().split('T')[0];
+            const storageKey = `shuffledAppOrder_${today}`;
+            const savedOrderJSON = localStorage.getItem(storageKey);
+    
+            if (savedOrderJSON) {
+                const savedOrder = JSON.parse(savedOrderJSON);
+                const appMap = new Map(rawInventory.map(app => [app.id, app]));
+                appStoreInventory = savedOrder.map(id => appMap.get(id)).filter(Boolean);
+                
+                const presentIds = new Set(savedOrder);
+                rawInventory.forEach(app => {
+                    if (!presentIds.has(app.id)) {
+                        appStoreInventory.push(app);
+                    }
+                });
+            } else {
+                appStoreInventory = rawInventory;
+                shuffleArray(appStoreInventory);
+                const newOrder = appStoreInventory.map(app => app.id);
+                localStorage.setItem(storageKey, JSON.stringify(newOrder));
+    
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith('shuffledAppOrder_') && key !== storageKey) {
+                        localStorage.removeItem(key);
+                    }
+                });
+            }
+            
             filterAndRender();
         }
         
