@@ -86,7 +86,7 @@
             "id": "sketchpad",
             "name": "SketchPad",
             "developer": "kirbIndustries",
-            "category": "Entertainment",
+            "category": "Tools",
             "iconUrl": "/appstore/inventories/default/appicon/sketch.png",
             "url": "/sketchpad/index.html",
             "filesToCache": ["/sketchpad/index.html", "/appstore/inventories/default/appicon/sketch.png", "/assets/gurapp/api/gurasuraisu-api.js"]
