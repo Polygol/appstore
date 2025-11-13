@@ -35,7 +35,7 @@
             "category": "Tools",
             "iconUrl": "/appstore/inventories/default/appicon/tasks.png",
             "url": "/fantaskical/index.html",
-            "filesToCache": ["/fantaskical/index.html", "/appstore/inventories/default/appicon/tasks.png", "/assets/gurapp/api/gurasuraisu-api.js"]
+            "filesToCache": ["/fantaskical/index.html", "/appstore/inventories/default/appicon/tasks.png", "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js", "/assets/gurapp/api/gurasuraisu-api.js"]
         },
         {
             "id": "moments",
