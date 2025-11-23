@@ -74,15 +74,6 @@
             "filesToCache": ["/clapper/index.html", "/appstore/inventories/default/appicon/video.png", "/assets/gurapp/api/gurasuraisu-api.js"]
         },
         {
-            "id": "waves",
-            "name": "Waves",
-            "developer": "kirbIndustries",
-            "category": "Other",
-            "iconUrl": "/appstore/inventories/default/appicon/home.png",
-            "url": "/waves/index.html",
-            "filesToCache": ["/waves/index.html", "/appstore/inventories/default/appicon/home.png", "/assets/gurapp/api/gurasuraisu-api.js"]
-        },
-        {
             "id": "sketchpad",
             "name": "SketchPad",
             "developer": "kirbIndustries",
