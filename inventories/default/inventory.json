@@ -61,7 +61,7 @@
             "developer": "Streams Music Team, sachinsenal0x64",
             "category": "Entertainment",
             "iconUrl": "/appstore/inventories/default/appicon/streams.png",
-            "url": "https://streamsmusic.github.io/streams/index.html",
+            "url": "https://streamsmusic.github.io/index.html",
             "filesToCache": ["https://streamsmusic.github.io/index.html", "/appstore/inventories/default/appicon/streams.png", "/assets/gurapp/api/gurasuraisu-api.js", "https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"]
         },
         {
