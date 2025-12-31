@@ -117,6 +117,15 @@
             "iconUrl": "/appstore/inventories/default/appicon/terminal.png",
             "url": "/terminal/index.html",
             "filesToCache": ["/terminal/index.html", "/appstore/inventories/default/appicon/terminal.png", "/assets/gurapp/api/gurasuraisu-api.js"]
+        },
+        {
+            "id": "widgizier",
+            "name": "Widgizier",
+            "developer": "Funizier",
+            "category": "Other",
+            "iconUrl": "/appstore/inventories/default/appicon/widgizier.png",
+            "url": "https://funizier.github.io/widgizier",
+            "filesToCache": ["https://funizier.github.io/widgizier", "/appstore/inventories/default/appicon/widgizier.png", "/assets/gurapp/api/gurasuraisu-api.js"]
         }
     ]
 }
