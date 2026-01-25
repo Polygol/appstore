@@ -126,6 +126,15 @@
             "iconUrl": "/appstore/inventories/default/appicon/widgizier.png",
             "url": "https://funizier.github.io/widgizier",
             "filesToCache": ["https://funizier.github.io/widgizier", "/appstore/inventories/default/appicon/widgizier.png", "/assets/gurapp/api/gurasuraisu-api.js"]
-        }
+        },
+        {
+            "id": "livespace",
+            "name": "Livespace",
+            "developer": "kirbIndustries",
+            "category": "Tools",
+            "iconUrl": "/appstore/inventories/default/appicon/livespace.png",
+            "url": "/livespace/index.html",
+            "filesToCache": ["/livespace/index.html", "/appstore/inventories/default/appicon/livespace.png", "/assets/gurapp/api/gurasuraisu-api.js"]
+        },
     ]
 }
