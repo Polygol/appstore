@@ -135,6 +135,15 @@
             "iconUrl": "/appstore/inventories/default/appicon/livespace.png",
             "url": "/livespace/index.html",
             "filesToCache": ["/livespace/index.html", "/appstore/inventories/default/appicon/livespace.png", "/assets/gurapp/api/gurasuraisu-api.js"]
+        },
+        {
+            "id": "messages_stub",
+            "name": "Messages",
+            "developer": "kirbIndustries",
+            "category": "Community",
+            "iconUrl": "/appstore/inventories/default/appicon/messages.png",
+            "url": "https://kirbindustries.gitbook.io/polygol/messages-for-polygol",
+            "filesToCache": ["/appstore/inventories/default/appicon/messages.png"]
         }
     ]
 }
