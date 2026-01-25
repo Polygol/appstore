@@ -135,6 +135,6 @@
             "iconUrl": "/appstore/inventories/default/appicon/livespace.png",
             "url": "/livespace/index.html",
             "filesToCache": ["/livespace/index.html", "/appstore/inventories/default/appicon/livespace.png", "/assets/gurapp/api/gurasuraisu-api.js"]
-        },
+        }
     ]
 }
