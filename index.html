@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>App Store only works with Polygol.</title>
+    <title>kirbStore only works with Polygol.</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,700,1,0" />
     <script src="/assets/gurapp/api/gurasuraisu-api.js" defer></script>
@@ -498,12 +498,12 @@
     <div class="create-modal" id="addStoreModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Add External App Store</h2>
+                <h2 class="modal-title">Add External Repository</h2>
             </div>
-            <div style="margin-bottom: 20px;">Using an unverified external App Store is at your own risk. It is recommended to only use kirbIndustries <a href="https://kirbindustries.gitbook.io/polygol/gurapps/verified-external-app-stores" target="_blank">verified stores</a>.</div>
+            <div style="margin-bottom: 20px;">Using an unverified external Store is at your own risk. It is recommended to only use kirbIndustries <a href="https://kirbindustries.gitbook.io/polygol/gurapps/verified-external-app-stores" target="_blank">verified stores</a>.</div>
             <div class="form-group">
-                <label class="form-label">App Store URL</label>
-                <input type="url" class="form-input" id="storeUrlInput" placeholder="Add a valid Polygol App Store inventory URL" required>
+                <label class="form-label">Store URL</label>
+                <input type="url" class="form-input" id="storeUrlInput" placeholder="Add a valid Polygol Store inventory URL" required>
             </div>
             <button class="submit-btn" id="submitStore">Add Store</button>
         </div>
@@ -555,7 +555,7 @@
                 storeUrlInput.value = '';
                 addStoreModal.classList.remove('show');
                 if (window.Gurasuraisu) {
-                    Gurasuraisu.showPopup('App store added successfully');
+                    Gurasuraisu.showPopup('Store added successfully');
                 }
             }
         });
@@ -749,12 +749,12 @@
         function onApiReady() {
             // Register all widgets the app provides as soon as the API is ready.
             Gurasuraisu.registerWidget({
-                appName: 'App Store',
-                widgetId: 'appstore-random-app',
+                appName: 'kirbStore',
+                widgetId: 'kirbstore-random-app',
                 title: 'Random App',
-                url: '/appstore/widgets/widget-random-app.html',
+                url: '/kirbstore/widgets/widget-random-app.html',
                 defaultSize: [1, 1],
-                openUrl: '/appstore/index.html' // Tapping the widget opens the main app
+                openUrl: '/kirbstore/index.html' // Tapping the widget opens the main app
             });
 
             // Now, continue with other initializations.
